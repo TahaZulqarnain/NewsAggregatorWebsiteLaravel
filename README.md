@@ -19,7 +19,7 @@ A Laravel 11 application that aggregates articles from multiple external news AP
 
 ---
 
-## ⚙️ Requirements
+## Requirements
 
 - PHP 8.2+
 - Laravel 11
@@ -30,7 +30,7 @@ A Laravel 11 application that aggregates articles from multiple external news AP
 
 ---
 
-## 🧑‍💻 Installation (Local Dev)
+## Installation (Local Dev)
 
 1. **Clone the repository**
    ```bash
@@ -54,7 +54,7 @@ Update .env with DB credentials
 
 ## Run Scheduler Locally
 
-php artisan schedule:work
+php artisan schedule:run
 
 ## Run the APP
 
