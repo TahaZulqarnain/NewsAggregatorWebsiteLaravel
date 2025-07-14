@@ -17,7 +17,7 @@ class ArticleController extends Controller
 
         $articles = $this->articleService->getFilteredArticles($filters, $perPage);
           return response()->json([
-            'total' => $articles->total(),
+            'total' => $articles->count(),
             'data' => ArticleResource::collection($articles)->resolve()
         ]);
     }
