@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Carbon\Carbon;
 
 class ArticleResource extends JsonResource
 {
@@ -23,8 +24,8 @@ class ArticleResource extends JsonResource
             'source'      => $this->source,
             'author'      => $this->author,
             'category'    => $this->category,
-            'published_at' => isset($item['publishedAt']) 
-            ? Carbon::parse($item['publishedAt'])->toDateTimeString()
+            'publishedAt' => isset($this->published_at) 
+            ? Carbon::parse($this->published_at)->toDateTimeString()
             : null,
         ];
     }

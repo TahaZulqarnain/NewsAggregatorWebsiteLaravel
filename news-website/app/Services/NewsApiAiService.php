@@ -36,9 +36,9 @@ class NewsApiAiService
         $articles = $response->json('articles.results');
 
         foreach ($articles ?? [] as $item) {
-            // $categories = collect($item['categories'] ?? [])
-            // ->pluck('label')
-            // ->implode(', '); 
+             $categories = collect($item['categories'] ?? [])
+             ->pluck('label')
+             ->implode(', '); 
             Article::updateOrCreate(
                 ['url' => $item['url']],
                 [
@@ -48,7 +48,7 @@ class NewsApiAiService
                     'image'        => $item['image'] ?? null,
                     'source'       => $item['source']['title'] ?? null,
                     'author'       => $item['authors'][0]['name'] ?? null,
-                    'category'     => $item['category'][0]['label'] ?? null,
+                    'category'     => $categories ?? null,
                     'published_at' => isset($item['dateTimePub']) ? Carbon::parse($item['dateTimePub'])->toDateTimeString() : null,
                 ]
             );

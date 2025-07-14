@@ -16,7 +16,9 @@ class ArticleController extends Controller
         $perPage = $filters['per_page'] ?? 10;
 
         $articles = $this->articleService->getFilteredArticles($filters, $perPage);
-
-        return ArticleResource::collection($articles);
+          return response()->json([
+            'total' => $articles->total(),
+            'data' => ArticleResource::collection($articles)->resolve()
+        ]);
     }
 }

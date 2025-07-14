@@ -29,7 +29,7 @@ class ArticleRequest extends FormRequest
             'from'      => ['nullable', 'date'],
             'to'        => ['nullable', 'date'],
             'page'      => ['nullable', 'integer', 'min:1'],
-            'per_page'  => ['nullable', 'integer', 'between:1,10'],
+            'per_page'  => ['nullable', 'integer', 'between:1,100'],
         ];
     }
 }
