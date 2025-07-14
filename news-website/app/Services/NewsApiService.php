@@ -36,22 +36,13 @@ class NewsApiService
                     ]
                 );
             }
-            ApiLog::create([
-                'source' => 'newsapi',
-                'endpoint' => '/v2/top-headlines',
-                'request_payload' => json_encode(['language' => 'en']),
-                'response_payload' => json_encode('Success'),
-                'success' => true,
-            ]);
+            
+            LogApiCallService::success('newsapi', '/v2/top-headlines', ['language' => 'en']);
+
         }
         catch (\Throwable $e) {
-            ApiLog::create([
-                'source' => 'newsapi',
-                'endpoint' => '/v2/top-headlines',
-                'request_payload' => json_encode(['language' => 'en']),
-                'success' => false,
-                'error_message' => $e->getMessage(),
-            ]);
+
+            LogApiCallService::failure('newsapi', '/v2/top-headlines', ['language' => 'en'], $e->getMessage());
 
             Log::error('NewsAPI Fetch Failed: ' . $e->getMessage());
         }

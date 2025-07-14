@@ -1,6 +1,7 @@
 <?php 
 
 namespace App\Services;
+use App\Models\Article;
 
 class ArticleService
 {
@@ -35,5 +36,10 @@ class ArticleService
             $query->whereBetween('published_at', [$filters['from'], $filters['to']]);
 
         return $query->latest()->paginate($perPage);
+    }
+
+    public function find($id): Article
+    {
+        return Article::findOrFail($id);
     }
 }

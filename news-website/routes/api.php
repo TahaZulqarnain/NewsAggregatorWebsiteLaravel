@@ -10,6 +10,7 @@ Route::get('/user', function (Request $request) {
 
 // routes/api.php
 Route::get('/articles', [ArticleController::class, 'index']);
+Route::get('/articles/{id}', [ArticleController::class, 'show']);
 //Route::apiResource('articles', ArticleController::class);
 
 

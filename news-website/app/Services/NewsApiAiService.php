@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Article;
 use App\Models\ApiLog;
 use Carbon\Carbon;
+use App\Services\LogApiCallService;
 
 
 class NewsApiAiService
@@ -53,22 +54,12 @@ class NewsApiAiService
                 ]
             );
         }
-        ApiLog::create([
-                'source' => 'newsapiai',
-                'endpoint' => '/api/v1/article/getArticles',
-                'request_payload' => json_encode(['language' => 'en']),
-                'response_payload' => json_encode('Success'),
-                'success' => true,
-        ]);
+        
+        LogApiCallService::success('newsapiai', '/api/v1/article/getArticles', ['language' => 'en']);
     }
     catch (\Throwable $e) {
-            ApiLog::create([
-                'source' => 'newsapiai',
-                'endpoint' => '/api/v1/article/getArticles',
-                'request_payload' => json_encode(['language' => 'en']),
-                'success' => false,
-                'error_message' => $e->getMessage(),
-            ]);
+
+        LogApiCallService::failure('newsapiai', '/api/v1/article/getArticles', ['language' => 'en'], $e->getMessage());
 
             Log::error('NewsAPIAI Fetch Failed: ' . $e->getMessage());
     }

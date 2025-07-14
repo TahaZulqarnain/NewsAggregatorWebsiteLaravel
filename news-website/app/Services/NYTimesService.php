@@ -37,22 +37,13 @@ class NYTimesService
                     ]
                 );
             }
-            ApiLog::create([
-                'source' => 'nytimes',
-                'endpoint' => '/svc/search/v2/articlesearch.json',
-                'request_payload' => json_encode(['language' => 'en']),
-                'response_payload' => json_encode('Success'),
-                'success' => true,
-            ]);
+            
+            LogApiCallService::success('nytimes', '/svc/search/v2/articlesearch.json', ['language' => 'en']);
+
         }
         catch (\Throwable $e) {
-            ApiLog::create([
-                'source' => 'nytimes',
-                'endpoint' => '/svc/search/v2/articlesearch.json',
-                'request_payload' => json_encode(['language' => 'en']),
-                'success' => false,
-                'error_message' => $e->getMessage(),
-            ]);
+
+            LogApiCallService::failure('nytimes', '/svc/search/v2/articlesearch.json', ['language' => 'en'], $e->getMessage());
 
             Log::error('NewsAPI Fetch Failed: ' . $e->getMessage());
         }
