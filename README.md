@@ -12,7 +12,7 @@ A Laravel 11 application that aggregates articles from multiple external news AP
   - [EventRegistry (NewsAPI.ai)](https://eventregistry.org/).
 
 -  Stores data in MySQL with fields: `title`, `description`, `content`, `author`, `source`, `category`, `published_at`, and `image`.
--  Cron runs every 10 minutes using Laravel’s scheduler or you can run it manually.
+-  Cron runs hourly using Laravel’s scheduler or you can run it manually.
 -  Logs each API request/response in `api_logs` table (success & failure).
 -  Sample Postman Collection provided.
 -  Database zip file also provided
